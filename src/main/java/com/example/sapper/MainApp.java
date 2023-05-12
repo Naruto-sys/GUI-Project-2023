@@ -12,6 +12,7 @@ public class MainApp extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("StartMenu.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        stage.setResizable(false);
         stage.setTitle("Sapper");
         stage.setScene(scene);
         stage.show();

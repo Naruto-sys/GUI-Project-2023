@@ -20,9 +20,9 @@
       </MenuBar>
       <VBox alignment="CENTER" prefHeight="574.0" prefWidth="900.0" spacing="10.0">
          <children>
-            <Button alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Easy" textAlignment="CENTER" />
-            <Button alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Medium" textAlignment="CENTER" />
-            <Button alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Hard" textAlignment="CENTER" />
+            <Button fx:id="EasyLevelButton" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#EasyLevelButtonClicked" prefHeight="50.0" prefWidth="200.0" text="Easy" textAlignment="CENTER" />
+            <Button fx:id="MediumLevelButton" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#MediumLevelButtonClicked" prefHeight="50.0" prefWidth="200.0" text="Medium" textAlignment="CENTER" />
+            <Button fx:id="HardLevelButton" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#HardLevelButtonClicked" prefHeight="50.0" prefWidth="200.0" text="Hard" textAlignment="CENTER" />
             <Button mnemonicParsing="false" onMouseClicked="#BackToStartGameButtonClicked" text="Back" />
          </children>
          <opaqueInsets>

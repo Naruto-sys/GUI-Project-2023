@@ -20,4 +20,31 @@ public class DifficultyChangeController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void EasyLevelButtonClicked(MouseEvent mouseEvent) throws IOException {
+        System.out.println("clicked easy");
+        Parent root = FXMLLoader.load(getClass().getResource("EasyLevel.fxml"));
+        Stage stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void MediumLevelButtonClicked(MouseEvent mouseEvent) throws IOException {
+        System.out.println("clicked medium");
+        Parent root = FXMLLoader.load(getClass().getResource("MediumLevel.fxml"));
+        Stage stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void HardLevelButtonClicked(MouseEvent mouseEvent) throws IOException {
+        System.out.println("clicked hard");
+        Parent root = FXMLLoader.load(getClass().getResource("HardLevel.fxml"));
+        Stage stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
