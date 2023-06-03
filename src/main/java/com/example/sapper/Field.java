@@ -11,6 +11,8 @@ import java.util.Random;
 public class Field {
 
     private List<ArrayList<Integer>> levelMap;
+    private boolean FirstTimeClicked = true;
+    private int bombCount = 0;
     private List<ArrayList<Integer>> ClickedMap = new ArrayList<>();
 
     List<Integer> GetFieldByDifficult(Difficulty difficulty) {
@@ -34,6 +36,7 @@ public class Field {
         res.add(HSize);
         res.add(VSize);
         res.add(BombCount);
+        bombCount = BombCount;
         return res;
     }
 
@@ -42,7 +45,6 @@ public class Field {
         List<Integer> Params = GetFieldByDifficult(difficulty);
         int VSize = Params.get(0);
         int HSize = Params.get(1);
-        int BombCount = Params.get(2);
         ClickedMap.clear();
         for (int i = 0; i < VSize; i++) { // Пустой 2-мерный массив
             ArrayList<Integer> list = new ArrayList<>();
@@ -52,36 +54,42 @@ public class Field {
             LevelMap.add(list);
             ClickedMap.add(list);
         }
+        FirstTimeClicked = true;
+        levelMap = LevelMap;
+        return LevelMap;
+    }
+
+    public void FillLevelMap(int ClickedX, int ClickedY) {
+        int VSize = levelMap.size();
+        int HSize = levelMap.get(0).size();
         int BombAdded = 0;
         int x, y;
-        while (BombAdded < BombCount) { // Генерим в случайных ячейках бомбы
+        while (BombAdded < bombCount) { // Генерим в случайных ячейках бомбы
             x = RandomInt(VSize - 1);
             y = RandomInt(HSize - 1);
-            if (LevelMap.get(x).get(y) != -1) {
+            if (levelMap.get(x).get(y) != -1 && !(x == ClickedX && y == ClickedY)) {
                 BombAdded++;
-                LevelMap.get(x).set(y, -1);
+                levelMap.get(x).set(y, -1);
             }
         }
         for (int i = 0; i < VSize; i++) { // Ставим в каждой ячейке нужное число
             for (int j = 0; j < HSize; j++) {
-                if (LevelMap.get(i).get(j) == -1) {
+                if (levelMap.get(i).get(j) == -1) {
                     continue;
                 }
                 int count = 0;
                 for (int i1 = i - 1; i1 <= i + 1; i1++) {
                     for (int j1 = j - 1; j1 <= j + 1; j1++) {
                         if (0 <= i1 && i1 < VSize && 0 <= j1 && j1 < HSize && (i1 != i || j1 != j)) {
-                            if (LevelMap.get(i1).get(j1) == -1) {
+                            if (levelMap.get(i1).get(j1) == -1) {
                                 count++;
                             }
                         }
                     }
                 }
-                LevelMap.get(i).set(j, count);
+                levelMap.get(i).set(j, count);
             }
         }
-        levelMap = LevelMap;
-        return LevelMap;
     }
 
     public void PaintLevel(GridPane pane, Difficulty difficulty, Field field, List<ArrayList<Integer>> LevelMap) {
@@ -100,6 +108,10 @@ public class Field {
 
     public void MapButtonClicked(int i, int j, GridPane pane) {
         Button button = new Button();
+        if (FirstTimeClicked) {
+            FillLevelMap(i, j);
+            FirstTimeClicked = false;
+        }
         button.setText(levelMap.get(i).get(j) + "");
         if (levelMap.get(i).get(j) == -1) { // нажали на мину, надо бы проиграть
             ClickedMap.get(i).set(j, 1);
