@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #15162d;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sapper.EasyLevelController">
     <children>
@@ -13,14 +15,32 @@
             <children>
                 <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="450.0" spacing="5.0">
                     <children>
-                        <Label prefHeight="60.0" prefWidth="38.0" text="Timer:" textFill="#dec9e9" />
-                        <Label fx:id="LevelTimerLabel" prefHeight="60.0" prefWidth="48.0" text="00:13:01" textFill="#dec9e9" />
+                        <Label prefHeight="60.0" prefWidth="55.0" text="Timer:" textFill="#dec9e9">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font></Label>
+                        <Label fx:id="LevelTimerLabel" prefHeight="60.0" prefWidth="65.0" text="00:13:01" textFill="#dec9e9">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="450.0" spacing="5.0">
                     <children>
-                        <Label prefHeight="60.0" prefWidth="38.0" text="Flags:" textFill="#dec9e9" />
-                        <Label fx:id="LevelFlagsLabel" prefHeight="60.0" prefWidth="48.0" text="3/15" textFill="#dec9e9" />
+                        <Label prefHeight="60.0" prefWidth="38.0" text="Flags:" textFill="#dec9e9">
+                     <font>
+                        <Font name="Berlin Sans FB" size="16.0" />
+                     </font></Label>
+                        <Label fx:id="LevelFlagsLabel" prefHeight="60.0" prefWidth="48.0" text="3/15" textFill="#dec9e9">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+                  <Button mnemonicParsing="false" onMouseClicked="#BackToDifficultyChangeMenuButtonClicked" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: #736ACF; -fx-background-radius: 20;" text="Back" textFill="#15162d">
+                     <font>
+                        <Font name="Berlin Sans FB" size="16.0" />
+                     </font>
+                  </Button>
                     </children>
                 </HBox>
             </children>
