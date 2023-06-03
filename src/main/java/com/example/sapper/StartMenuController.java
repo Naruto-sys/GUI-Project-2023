@@ -25,4 +25,8 @@ public class StartMenuController {
         stage.setScene(scene);
         stage.show();
     }
+    @FXML
+    public void CloseButtonAction(ActionEvent event) {
+        ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
+    }
 }

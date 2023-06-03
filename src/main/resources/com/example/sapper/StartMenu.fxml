@@ -35,7 +35,7 @@
                         <Font name="Berlin Sans FB" size="16.0" />
                     </font>
                 </Button>
-                <Button alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #736ACF; -fx-background-radius: 30;" text="idk3" textAlignment="CENTER" textFill="#15162d">
+                <Button alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#CloseButtonAction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #736ACF; -fx-background-radius: 30;" text="Exit" textAlignment="CENTER" textFill="#15162d">
                     <font>
                         <Font name="Berlin Sans FB" size="16.0" />
                     </font>
