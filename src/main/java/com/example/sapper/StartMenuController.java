@@ -26,6 +26,20 @@ public class StartMenuController {
         stage.show();
     }
     @FXML
+    public Button RulesButton;
+    @FXML
+    public void RulesButtonClicked(MouseEvent mouseEvent) throws IOException {
+        System.out.println("clicked");
+        Parent root = FXMLLoader.load(getClass().getResource("Rules.fxml"));
+        Stage stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    public Button ExitButton;
+    @FXML
     public void CloseButtonAction(ActionEvent event) {
         ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
     }

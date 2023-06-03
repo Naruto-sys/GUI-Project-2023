@@ -25,7 +25,7 @@
                         <Insets />
                     </opaqueInsets>
                 </Button>
-                <Button alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #DA9FB6; -fx-background-radius: 30;" text="idk" textAlignment="CENTER" textFill="#15162d">
+                <Button fx:id="RulesButton" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#RulesButtonClicked" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #DA9FB6; -fx-background-radius: 30;" text="Rules" textAlignment="CENTER" textFill="#15162d">
                     <font>
                         <Font name="Berlin Sans FB" size="16.0" />
                     </font>
@@ -35,7 +35,7 @@
                         <Font name="Berlin Sans FB" size="16.0" />
                     </font>
                 </Button>
-                <Button alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#CloseButtonAction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #736ACF; -fx-background-radius: 30;" text="Exit" textAlignment="CENTER" textFill="#15162d">
+                <Button fx:id="ExitButton" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#CloseButtonAction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #736ACF; -fx-background-radius: 30;" text="Exit" textAlignment="CENTER" textFill="#15162d">
                     <font>
                         <Font name="Berlin Sans FB" size="16.0" />
                     </font>
