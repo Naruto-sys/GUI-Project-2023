@@ -1,19 +1,53 @@
 package com.example.sapper;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-
+import javafx.scene.paint.Color;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Field {
+
+
+
+public class Field{
 
     private List<ArrayList<Integer>> levelMap;
     private boolean FirstTimeClicked = true;
     private int bombCount = 0;
+    private int countOpenCells = 0;
+    private Difficulty currentDiff;
     private List<ArrayList<Integer>> ClickedMap = new ArrayList<>();
+    private boolean isGameOver;
+    public boolean isGameOver() {
+        return isGameOver;
+    }
+    public void setGameOver(boolean gameOver) {
+        isGameOver = gameOver;
+    }
+
+
+    public int determineFieldSize (Difficulty difficulty) {
+        int closedCellsNumber = 0;
+        if (difficulty.equals(Difficulty.EASY)) {
+            closedCellsNumber = 8 * 8 - 10;
+        } else if (difficulty.equals(Difficulty.MEDIUM)) {
+            closedCellsNumber = 16 * 16 - 20;
+        } else if (difficulty.equals(Difficulty.HARD)) {
+            closedCellsNumber = 16 * 30 - 40;
+        }
+        return closedCellsNumber;
+    }
+
+
 
     List<Integer> GetFieldByDifficult(Difficulty difficulty) {
         int BombCount = 0;
@@ -40,8 +74,11 @@ public class Field {
         return res;
     }
 
+
+
     List<ArrayList<Integer>> CreateField(Difficulty difficulty) {
         List<ArrayList<Integer>> LevelMap = new ArrayList<>();
+        currentDiff = difficulty;
         List<Integer> Params = GetFieldByDifficult(difficulty);
         int VSize = Params.get(0);
         int HSize = Params.get(1);
@@ -67,6 +104,7 @@ public class Field {
         while (BombAdded < bombCount) { // Генерим в случайных ячейках бомбы
             x = RandomInt(VSize - 1);
             y = RandomInt(HSize - 1);
+            // System.out.println("Bomb here X: " + x + "; Y: " + y);
             if (levelMap.get(x).get(y) != -1 && !(x == ClickedX && y == ClickedY)) {
                 BombAdded++;
                 levelMap.get(x).set(y, -1);
@@ -102,12 +140,20 @@ public class Field {
                 pane.add(button, i, j);
                 int finalI = i;
                 int finalJ = j;
-                button.setOnMouseClicked(mouseEvent -> MapButtonClicked(finalI, finalJ, pane));
+                button.setOnMouseClicked(mouseEvent -> {
+                    try {
+                        MapButtonClicked(finalI, finalJ, pane);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
             }
         }
     }
 
-    public void MapButtonClicked(int i, int j, GridPane pane) {
+
+
+    public void MapButtonClicked(int i, int j, GridPane pane) throws IOException {
         Button button = new Button();
         button.setPrefSize(28, 28);
         if (FirstTimeClicked) {
@@ -116,12 +162,32 @@ public class Field {
         }
         button.setText(levelMap.get(i).get(j) + "");
         if (levelMap.get(i).get(j) == -1) { // нажали на мину, надо бы проиграть
-            ClickedMap.get(i).set(j, 1);
-            pane.add(button, i, j);
+            if (!isGameOver) {
+                setGameOver(true);
+                ClickedMap.get(i).set(j, 1);
+                pane.add(button, i, j);
+                Parent sss = FXMLLoader.load(getClass().getResource("Loss.fxml"));
+                Stage stage = (Stage)(button.getScene().getWindow());
+                Scene scene = new Scene(sss);
+                stage.setScene(scene);
+                stage.show();
+            }
         } else { // нажали не на мину
-            ZeroClicked(i, j, pane);
-            ClickedMap.get(i).set(j, 1);
-            pane.add(button, i, j);
+            if (!isGameOver()) {
+                if(levelMap.get(i).get(j) != 0) {
+                    countOpenCells += 1;
+                }
+                ZeroClicked(i, j, pane);
+                ClickedMap.get(i).set(j, 1);
+                pane.add(button, i, j);
+                if(countOpenCells == determineFieldSize(currentDiff)) {
+                    Parent winFXML = FXMLLoader.load(getClass().getResource("Win.fxml"));
+                    Stage stage = (Stage)(button.getScene().getWindow());
+                    Scene scene = new Scene(winFXML);
+                    stage.setScene(scene);
+                    stage.show();
+                }
+            }
         }
     }
 
@@ -131,6 +197,7 @@ public class Field {
         if (i >= VSize || i < 0 || j >= HSize || j < 0) { return; }
         if (levelMap.get(i).get(j) != 0) { return; }
         if (ClickedMap.get(i).get(j) != 0) { return; }
+        countOpenCells += 1;
         Button button = new Button("0");
         button.setPrefSize(28, 28);
         pane.add(button, i, j);
