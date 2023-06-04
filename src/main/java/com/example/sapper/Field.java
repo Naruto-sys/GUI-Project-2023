@@ -98,6 +98,7 @@ public class Field {
         for (int i = 0; i < LevelMap.size(); i++) {
             for (int j = 0; j < LevelMap.get(0).size(); j++) {
                 button = new Button();
+                button.setPrefSize(28, 28);
                 pane.add(button, i, j);
                 int finalI = i;
                 int finalJ = j;
@@ -108,6 +109,7 @@ public class Field {
 
     public void MapButtonClicked(int i, int j, GridPane pane) {
         Button button = new Button();
+        button.setPrefSize(28, 28);
         if (FirstTimeClicked) {
             FillLevelMap(i, j);
             FirstTimeClicked = false;
@@ -130,6 +132,7 @@ public class Field {
         if (levelMap.get(i).get(j) != 0) { return; }
         if (ClickedMap.get(i).get(j) != 0) { return; }
         Button button = new Button("0");
+        button.setPrefSize(28, 28);
         pane.add(button, i, j);
         ClickedMap.get(i).set(j, 1);
         ZeroClicked(i - 1, j, pane);
