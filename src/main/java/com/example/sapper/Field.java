@@ -27,14 +27,6 @@ public class Field{
     private Difficulty currentDiff;
     private List<ArrayList<Integer>> ClickedMap = new ArrayList<>();
     private boolean isGameOver;
-    public boolean isGameOver() {
-        return isGameOver;
-    }
-    public void setGameOver(boolean gameOver) {
-        isGameOver = gameOver;
-    }
-
-
     public int determineFieldSize (Difficulty difficulty) {
         int closedCellsNumber = 0;
         if (difficulty.equals(Difficulty.EASY)) {
@@ -163,7 +155,7 @@ public class Field{
         button.setText(levelMap.get(i).get(j) + "");
         if (levelMap.get(i).get(j) == -1) { // нажали на мину, надо бы проиграть
             if (!isGameOver) {
-                setGameOver(true);
+                isGameOver = true;
                 ClickedMap.get(i).set(j, 1);
                 pane.add(button, i, j);
                 Parent sss = FXMLLoader.load(getClass().getResource("Loss.fxml"));
@@ -173,7 +165,7 @@ public class Field{
                 stage.show();
             }
         } else { // нажали не на мину
-            if (!isGameOver()) {
+            if (!isGameOver) {
                 if(levelMap.get(i).get(j) != 0) {
                     countOpenCells += 1;
                 }
