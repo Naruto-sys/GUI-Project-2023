@@ -57,7 +57,7 @@ public class MediumLevelController {
     @FXML
     public void initialize() {
         LevelMap = field.CreateField(Difficulty.MEDIUM);
-        field.PaintLevel(LevelGridPane, Difficulty.MEDIUM, field, LevelMap);
+        field.PaintLevel(LevelGridPane, Difficulty.MEDIUM, field, LevelMap, LevelFlagsLabel);
         animationTimer.start();
     }
 

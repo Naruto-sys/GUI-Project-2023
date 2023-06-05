@@ -57,7 +57,7 @@ public class HardLevelController {
     @FXML
     public void initialize() {
         LevelMap = field.CreateField(Difficulty.HARD);
-        field.PaintLevel(LevelGridPane, Difficulty.HARD, field, LevelMap);
+        field.PaintLevel(LevelGridPane, Difficulty.HARD, field, LevelMap, LevelFlagsLabel);
         animationTimer.start();
     }
 

@@ -123,7 +123,7 @@ public class Field{
         }
     }
 
-    public void PaintLevel(GridPane pane, Difficulty difficulty, Field field, List<ArrayList<Integer>> LevelMap) {
+    public void PaintLevel(GridPane pane, Difficulty difficulty, Field field, List<ArrayList<Integer>> LevelMap, Label label) {
         Image image = new Image("C:/Users/Иван/Desktop/GUI-Project-2023-win-lose-func/src/main/resources/com/example/pictures/flag.png");
         LevelMap = field.CreateField(difficulty);
         Button button;
