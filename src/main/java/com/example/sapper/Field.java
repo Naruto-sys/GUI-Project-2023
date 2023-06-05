@@ -38,6 +38,7 @@ public class Field{
         }
         return closedCellsNumber;
     }
+    private int countOfFlags;
 
 
 
@@ -123,18 +124,37 @@ public class Field{
     }
 
     public void PaintLevel(GridPane pane, Difficulty difficulty, Field field, List<ArrayList<Integer>> LevelMap) {
+        Image image = new Image("C:/Users/Иван/Desktop/GUI-Project-2023-win-lose-func/src/main/resources/com/example/pictures/flag.png");
         LevelMap = field.CreateField(difficulty);
         Button button;
         for (int i = 0; i < LevelMap.size(); i++) {
             for (int j = 0; j < LevelMap.get(0).size(); j++) {
+                ImageView imageView = new ImageView(image);
+                imageView.setFitHeight(0.001);
+                imageView.setFitWidth(0.001);
                 button = new Button();
-                button.setPrefSize(28, 28);
-                pane.add(button, i, j);
+                button.setGraphic(imageView);
+                button.setMinSize(28,28);
+                button.setStyle("-fx-background-color: #3b4ef7; -fx-border-color: #242d7d; -fx-border-width: 2px;");
+                pane.add(button,i,j);
                 int finalI = i;
                 int finalJ = j;
+                Button finalButton = button;
                 button.setOnMouseClicked(mouseEvent -> {
                     try {
-                        MapButtonClicked(finalI, finalJ, pane);
+                        if (mouseEvent.getButton() == MouseButton.SECONDARY && imageView.getFitHeight() == 0.001 && countOfFlags < bombCount){
+                            imageView.setFitWidth(7);
+                            imageView.setFitHeight(7);
+                            countOfFlags+=1;
+                            label.setText(String.valueOf(countOfFlags) + "/" + String.valueOf(bombCount));
+                        } else if (mouseEvent.getButton() == MouseButton.SECONDARY && imageView.getFitHeight() == 7){
+                            imageView.setFitWidth(0.001);
+                            imageView.setFitHeight(0.001);
+                            countOfFlags-=1;
+                            label.setText(String.valueOf(countOfFlags) + "/" + String.valueOf(bombCount));
+                        } else if (mouseEvent.getButton() != MouseButton.SECONDARY && imageView.getFitHeight() != 7){
+                            MapButtonClicked(finalI, finalJ, pane);
+                        }
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -171,6 +191,15 @@ public class Field{
                 }
                 ZeroClicked(i, j, pane);
                 ClickedMap.get(i).set(j, 1);
+                if (levelMap.get(i).get(j) == 0){
+                    button.setStyle("-fx-background-color: #242d7d; -fx-text-fill: #E5B6B0");
+                } else if (levelMap.get(i).get(j) == 1){
+                    button.setStyle("-fx-background-color: #242d7d; -fx-text-fill: #DA9FB6");
+                } else if (levelMap.get(i).get(j) == 2){
+                    button.setStyle("-fx-background-color: #242d7d; -fx-text-fill: #C285B6");
+                } else {
+                    button.setStyle("-fx-background-color: #242d7d; -fx-text-fill: #736ACF");
+                }
                 pane.add(button, i, j);
                 if(countOpenCells == determineFieldSize(currentDiff)) {
                     Parent winFXML = FXMLLoader.load(getClass().getResource("Win.fxml"));
@@ -191,6 +220,7 @@ public class Field{
         if (ClickedMap.get(i).get(j) != 0) { return; }
         countOpenCells += 1;
         Button button = new Button("0");
+        button.setStyle("-fx-background-color: #242d7d; -fx-text-fill: #E5B6B0;");
         button.setPrefSize(28, 28);
         pane.add(button, i, j);
         ClickedMap.get(i).set(j, 1);

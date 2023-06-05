@@ -24,11 +24,41 @@ public class MediumLevelController {
     private Field field = new Field();
 
     private List<ArrayList<Integer>> LevelMap;
+    private int k = 0;
+    private int k1 = 0;
+    private int k2 = 0;
+
+
+    AnimationTimer animationTimer = new AnimationTimer() {
+        @Override
+        public void handle(long l) {
+            if (k < 100){
+                LevelTimerLabel.setText(String.valueOf(k2) + ":" + String.valueOf(k1) + ":" + String.valueOf(k));
+                k+=1;
+            } else if (k == 100) {
+                k1 += 1;
+                if (k1 < 10) {
+                    LevelTimerLabel.setText(String.valueOf(k2) + ":" + String.valueOf(k1) + ":00");
+                } else if (k1 < 60) {
+                    LevelTimerLabel.setText(String.valueOf(k2) + ":" + String.valueOf(k1) + ":00");
+                } else {
+                    k2 += 1;
+                    LevelTimerLabel.setText("0" + String.valueOf(k2) + ":00:00");
+                    k1 = 0;
+                }
+                k = 0;
+            }
+
+
+        }
+    };
+
 
     @FXML
     public void initialize() {
         LevelMap = field.CreateField(Difficulty.MEDIUM);
         field.PaintLevel(LevelGridPane, Difficulty.MEDIUM, field, LevelMap);
+        animationTimer.start();
     }
 
     public void BackToDifficultyChangeMenuButtonClicked(MouseEvent mouseEvent) throws IOException {
