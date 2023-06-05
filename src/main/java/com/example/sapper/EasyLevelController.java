@@ -59,7 +59,7 @@ public class EasyLevelController {
     @FXML
     public void initialize() {
         LevelMap = field.CreateField(Difficulty.EASY);
-        field.PaintLevel(LevelGridPane, Difficulty.EASY, field, LevelMap);
+        field.PaintLevel(LevelGridPane, Difficulty.EASY, field, LevelMap, LevelFlagsLabel);
         animationTimer.start();
     }
 
