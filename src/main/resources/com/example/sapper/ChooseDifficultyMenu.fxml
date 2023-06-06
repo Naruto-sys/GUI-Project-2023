@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sapper.DifficultyChangeController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="900.0" spacing="10.0" style="-fx-background-color: #15162d;">
+         <children>
+            <Button fx:id="EasyLevelButton" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#EasyLevelButtonClicked" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #E5B6B0; -fx-background-radius: 30;" text="Easy" textAlignment="CENTER" textFill="#15162d">
+               <font>
+                  <Font name="Berlin Sans FB" size="16.0" />
+               </font></Button>
+            <Button fx:id="MediumLevelButton" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#MediumLevelButtonClicked" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #DA9FB6; -fx-background-radius: 30;" text="Medium" textAlignment="CENTER" textFill="#15162d">
+               <font>
+                  <Font name="Berlin Sans FB" size="16.0" />
+               </font></Button>
+            <Button fx:id="HardLevelButton" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#HardLevelButtonClicked" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #C285B6; -fx-background-radius: 30;" text="Hard" textAlignment="CENTER" textFill="#15162d">
+               <font>
+                  <Font name="Berlin Sans FB" size="16.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onMouseClicked="#BackToStartGameButtonClicked" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: #736ACF; -fx-background-radius: 30;" text="Back" textFill="#15162d">
+               <font>
+                  <Font name="Berlin Sans FB" size="16.0" />
+               </font></Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </VBox>
+   </children>
+</VBox>
